@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image to ascii</title>
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="buttons">
+        <button id="img-btn">Image</button>
+        <button id="text-btn">Text</button>
+      </div>
+      <div id="img-url">
+        <input id="url-input" type="text" placeholder="Image URL" />
+      </div>
+    </div>
+    <script src="{{ url_for('static', path='/script.js') }}"></script>
+  </body>
+</html>
