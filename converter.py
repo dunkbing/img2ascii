@@ -19,6 +19,7 @@ def from_url(url: str) -> Image:
 def image_to_ascii(url) -> str:
     parsed_url = urlparse(url)
     filename = os.path.basename(parsed_url.path)
+    filename = f"{filename.split('.')[0]}.txt"
     img = from_url(url)
     # resize the image
     width, height = img.size

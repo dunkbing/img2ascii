@@ -1,26 +1,40 @@
-import io
-from fastapi import FastAPI
+from os import path
+from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
 import converter
 import uvicorn
 
 app = FastAPI()
 
+app.mount(
+    "/static",
+    # StaticFiles(directory=Path(__file__).absolute() / "static"),
+    StaticFiles(directory=path.join(path.dirname(__file__), "static")),
+    name="static",
+)
+
+templates = Jinja2Templates(directory="static")
+
 
 @app.get("/")
-async def root():
-    return {"message": "Hello"}
+async def root(request: Request):
+    return templates.TemplateResponse(
+        "index.html", {"request": request}
+    )
 
 
 @app.get("/image")
-def image(image_url: str):
-    image = converter.text_to_image(image_url)
+def image(url: str):
+    image = converter.text_to_image(url)
     return FileResponse(image)
 
 
 @app.get("/text", response_class=FileResponse)
-def text(image_url: str):
-    ascii_file = converter.image_to_ascii(image_url)
+def text(url: str):
+    ascii_file = converter.image_to_ascii(url)
     return ascii_file
 
 

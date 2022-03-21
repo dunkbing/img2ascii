@@ -8,9 +8,10 @@ pillow = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 requests = "*"
+jinja2 = "*"
 
 [dev-packages]
 autopep8 = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
